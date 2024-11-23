@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 offset-md-4">
+                <div class="card card-sh">
+                    <div class="card-header text-center">
+                        <div class="fs-4">Edit Category</div>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/updateCategory" method="post">
+                            <input type="hidden" name="id" th:value="${category.id}">
+                            <div class="mb-3">
+                                Enter Category
+                                <input type="text" name="name" class="form-control" th:value="${category.name}">
+
+                            </div>
+                            <button class="btn btn-primary col-md-12 mt-2">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

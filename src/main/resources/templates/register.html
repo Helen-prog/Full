@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+<section>
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center fs-4">Register Page</div>
+                    <th:block th:if="${session.msg}">
+                        <p class="text-center text-success fs-4" th:text="${session.msg}"></p>
+                        <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+                    </th:block>
+
+                    <div class="card-body">
+                        <form action="saveUser" method="post">
+                            <div class="mb-3">
+                                <p>FIO:
+                                    <input type="text" name="name" class="form-control">
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <p>Email:
+                                    <input type="email" name="email" class="form-control">
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <p>Mobile Number:
+                                    <input type="text" name="phone" class="form-control">
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <p>Password:
+                                    <input type="password" name="password" class="form-control">
+                                </p>
+                            </div>
+                            <p><button class="btn btn-primary col-md-12">Register</button></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+</body>
+</html>

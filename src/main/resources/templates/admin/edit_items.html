@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card card-sh">
+          <div class="card-header text-center fs-4">
+            Edit Item
+            <th:block th:if="${session.succMsg}">
+              <p class="text-success fw-bold" th:text="${session.succMsg}"></p>
+              <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+            </th:block>
+
+            <th:block th:if="${session.errorMsg}">
+              <p class="text-danger fw-bold" th:text="${session.errorMsg}"></p>
+              <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+            </th:block>
+          </div>
+          <div class="card-body">
+            <form action="/admin/updatePost" method="post"
+                  enctype="multipart/form-data">
+              <input type="hidden" name="id" th:value="${post.id}">
+              <div class="mb-3">
+                Enter Title
+                <input type="text" name="title" th:value="${post.title}" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                Enter Description
+                <textarea rows="3" cols="" class="form-control"
+                          name="content">[[${post.content}]]</textarea>
+              </div>
+              <div class="row">
+                <div class="mb-3">
+                  <label>Category</label>
+                  <select class="form-control"
+                          name="category">
+                    <option>[[${post.category}]]</option>
+                    <option th:each="c:${categories}" th:text="${c.name}"></option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3">
+                  Upload Image
+                  <input type="file" name="file" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <img th:src="@{'/img/post_img/'+${post.image}}"
+                       width="200">
+                </div>
+
+              </div>
+              <button class="btn btn-primary col-md-12">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

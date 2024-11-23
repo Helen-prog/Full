@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" th:fragment="menu" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <th:block th:if="${user==null}">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                </th:block>
+
+                <th:block th:unless="${user==null}">
+                    <li class="nav-item" th:if="${user.role=='ROLE_ADMIN'}">
+                        <a class="nav-link active" aria-current="page" th:href="@{/admin/}" th:text="${user.name}"></a>
+                    </li>
+                    <li class="nav-item" th:if="${user.role=='ROLE_USER'}">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}" th:text="${user.name}"></a>
+                    </li>
+                </th:block>
+
+                <th:block th:if="${user!=null}">
+                    <li class="nav-item" th:if="${user.role=='ROLE_USER'}">
+                        <a class="nav-link" th:href="@{/user/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item" th:if="${user.role=='ROLE_ADMIN'}">
+                        <a class="nav-link" th:href="@{/admin/profile}">Profile</a>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Logout</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${user==null}">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/register}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/signin}">Login</a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</nav>

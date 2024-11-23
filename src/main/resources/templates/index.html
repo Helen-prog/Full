@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+<section>
+    <div class="container-fluid bg-secondary p-3">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="search" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="ch">
+                        <button class="btn btn-light text-dark ms-3">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-1">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="card shadow-sm p3 mb-5 bg-body-tertiary rounded">
+                    <div class="card-body">
+                        <!-- list group на bootstrap -->
+                        <p class="fs-5">Категории</p>
+                        <div class="list-group">
+                            <a href="/" class="list-group-item list-group-item-action"
+                               th:classappend="${paramValue == ''} ? 'active' : ''"
+                               aria-current="true">
+                                Все
+                            </a>
+
+                            <a th:href="@{'?category='+${c.name}}"
+                               th:classappend="${paramValue == c.name} ? 'active' : ''"
+                               th:each="c:${categories}"
+                               th:text="${c.name}"
+                               class="list-group-item list-group-item-action"></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="card shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+                    <div class="card-body">
+                        <p class="fs-3 text-center">Блог</p>
+                        <div class="row">
+
+                            <th:block th:if="${postsSize > 0}">
+                                <div class="col-md-3 mb-3" th:each="p:${posts}">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <img th:src="@{'/img/post_img/'+${p.image}}" alt="" width="100%">
+                                            <p class="fs-5 text-center" th:text="${p.title}"></p>
+                                            <div class="row text-center">
+                                                <a th:href="@{'/item/'+${p.id}}"
+                                                   class="btn btn-secondary col-md-6 offset-md-3">Подробнее</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${postsSize > 0}">
+                                <p class="fs-4 text-center mt-4 text-primary">В этой категории нет постов</p>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">Total Posts: <span th:text="${totalElements}"></span></div>
+                    <div class="col-md-6">
+                        <th:block th:if="${TotalPages>1}">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" th:href="@{'?pageNo='+${pageNo-1}}"                               th:classappend="${isFirst}?'disabled':''">Previous</a></li>
+
+                                    <li th:each="i:${#numbers.sequence(1, TotalPages)}" class="page-item" th:classappend="${pageNo+1==i}?'active':''">
+                                        <a class="page-link" th:href="@{'/?pageNo='+${i-1}}" th:text="${i}"></a>
+                                    </li>
+
+                                    <li class="page-item"><a class="page-link" th:href="@{'?pageNo='+${pageNo+1}}"                         th:classappend="${isLast}?'disabled':''">Next</a></li>
+                                </ul>
+                            </nav>
+                        </th:block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

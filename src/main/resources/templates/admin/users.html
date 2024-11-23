@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container mt-4">
+        <div class="card card-sh">
+            <div class="card-header text-center">
+                <p class="fs-4">Users</p>
+                <th:block th:if="${session.succMsg}">
+                    <p class="text-success fw-bold" th:text="${session.succMsg}"></p>
+                    <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+                </th:block>
+
+                <th:block th:if="${session.errorMsg}">
+                    <p class="text-danger fw-bold" th:text="${session.errorMsg}"></p>
+                    <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+                </th:block>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th scope="col">Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Mobile Number</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    <tr th:each="u, c : ${users}">
+                        <th scope="row" th:text="${c.count}"></th>
+                        <td th:text="${u.name}"></td>
+                        <td th:text="${u.email}"></td>
+                        <td th:text="${u.phone}"></td>
+                        <td>
+                            <a th:href="@{'/admin/updateSts?id='+${u.id}+'&type='+${userType}}" class="btn btn-sm btn-primary">Active</a>
+                            <a th:href="@{'/admin/updateSts?id='+${u.id}+'&type='+${userType}}" class="btn btn-sm btn-danger">Inactive</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

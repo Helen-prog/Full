@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container p-5">
+        <p class="text-center fs-3 mt-4">Admin Dashboard</p>
+        <div class="row p-5">
+            <div class="col-md-4 mt-2">
+                <a href="/admin/loadAddItem" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <img src="/img/icon/1.jpg" alt="" class="img">
+                            <h4>Add Item</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="col-md-4 mt-2">
+                <a href="/admin/category" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <img src="/img/icon/2.jpg" alt="" class="img">
+                            <h4>Add Category</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="col-md-4 mt-2">
+                <a href="/admin/items" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-success">
+                            <img src="/img/icon/3.jpg" alt="" class="img">
+                            <h4>View Item</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a href="/admin/users?type=1" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <img src="/img/icon/4.jpg" alt="" class="img">
+                            <h4>Users</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="col-md-4 mt-4">
+                <a href="/admin/add-admin" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <img src="/img/icon/5.jpg" alt="" class="img">
+                            <h4>Add Admin</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a href="/admin/users?type=2" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <img src="/img/icon/6.jpg" alt="" class="img">
+                            <h4>Admin</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

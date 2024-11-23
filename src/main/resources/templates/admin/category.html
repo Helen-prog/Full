@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-sh">
+                    <div class="card-header text-center ">
+                        <div class="fs-4">Add Category</div>
+                        <th:block th:if="${session.succMsg}">
+                            <p class="text-success fw-bold" th:text="${session.succMsg}"></p>
+                            <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.errorMsg}">
+                            <p class="text-danger fw-bold" th:text="${session.errorMsg}"></p>
+                            <th:block th:text="${@userService.removeSessionMessage()}"></th:block>
+                        </th:block>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/saveCategory" method="post"
+                              enctype="multipart/form-data">
+                            <div class="mb-3">
+                                Enter Category
+                                <input type="text" name="name" class="form-control">
+
+                            </div>
+                            <button class="btn btn-primary col-md-12 mt-2">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card card-sh">
+                    <div class="card-header text-center fs-4">Category Details</div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            <tr th:each="cat : ${categories}">
+                                <td th:text="${cat.name}">Назавание категории</td>
+                                <td>
+                                    <a th:href="@{'/admin/loadEditCategory/'+${cat.id}}"
+                                       class="btn btn-primary btn-sm"> Edit </a>
+                                    <a th:href="@{'/admin/deleteCategory/'+${cat.id}}"
+                                       class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
